@@ -1,0 +1,10 @@
+.DS_Store
+.DS_Store?
+._*
+*.log
+error_log
+debug.log
+tmp/
+temp/
+*.tmp
+*.bak
