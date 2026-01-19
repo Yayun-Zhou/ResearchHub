@@ -141,7 +141,7 @@ https://hypernormal-nontopographical-nathaniel.ngrok-free.dev/ResearchHub/
 
 To access the application via the ngrok URL, the author must:
 1. Start the local Apache/PHP server
-2. Expose the local port using ngrok in the terminal
+2. Expose the local port using ngrok in the terminal - ngrok http 80
 3. Keep the terminal session running
 
 ### Default Login Credentials
