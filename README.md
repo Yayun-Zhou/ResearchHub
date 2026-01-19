@@ -136,7 +136,7 @@ http://localhost/ResearchHub
 
 Remote Access (for demonstration purposes only):
 ```
-[text](https://hypernormal-nontopographical-nathaniel.ngrok-free.dev/ResearchHub/)
+https://hypernormal-nontopographical-nathaniel.ngrok-free.dev/ResearchHub/
 ```
 
 To access the application via the ngrok URL, the author must:
