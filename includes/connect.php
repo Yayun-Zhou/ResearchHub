@@ -21,20 +21,22 @@ if (session_status() === PHP_SESSION_NONE) {
 // DATABASE CONNECTION
 // ========================
 
-$host   = "localhost";
-$dbName = "projectDB3";
-// $dbUser = "root";
-// $dbPass = ""; // XAMPP default
+// Credentials and the token-signing key live in config.php, which is NOT in git.
+// __DIR__ makes this resolve relative to THIS file, so it works both from the
+// site root and from controllers/ (which sit one directory deeper).
+require_once __DIR__ . '/config.php';
 
+$host   = DB_HOST;
+$dbName = DB_NAME;
 
 $sessionRole = $_SESSION['Role'] ?? 'app_user';  // default as app_user
 
 if ($sessionRole === 'Admin') {
-    $dbUser = "admin";
-    $dbPass = "admin_password";
+    $dbUser = DB_ADMIN_USER;
+    $dbPass = DB_ADMIN_PASS;
 } else {
-    $dbUser = "app_user";
-    $dbPass = "app_user_password";
+    $dbUser = DB_APP_USER;
+    $dbPass = DB_APP_PASS;
 }
 
 try {

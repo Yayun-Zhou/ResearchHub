@@ -2,8 +2,7 @@
 session_start();
 require_once "includes/connect.php";
 
-// Secret key (same as in forgot_password_handler.php)
-define('SECRET_KEY', 'your-super-secret-key-change-this-in-production-12345');
+// SECRET_KEY comes from includes/config.php (loaded by connect.php above).
 
 $token = $_GET['token'] ?? '';
 $error = $_GET['error'] ?? '';

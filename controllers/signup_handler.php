@@ -19,6 +19,15 @@ if (!$password) $errors[] = "Password is required";
 if ($password !== $confirmPassword) $errors[] = "Passwords do not match";
 if (!$affiliationID) $errors[] = "Affiliation is required";
 
+// Role arrives in $_POST, so it is fully attacker-controlled: the <select> on
+// signup.php is only a client-side hint. Without this check anyone can POST
+// role=Admin and self-provision an administrator (which connect.php would then
+// honour by connecting as the MySQL admin account). Self-service roles are
+// deliberately limited to the three non-privileged ones; Admin is granted only
+// by an existing admin via controllers/promote_handler.php.
+$allowedRoles = ['Student', 'Researcher', 'Professor'];
+if (!in_array($role, $allowedRoles, true)) $errors[] = "Invalid role";
+
 // If validation fails → redirect back
 if (!empty($errors)) {
     $query = implode('|', $errors);

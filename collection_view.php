@@ -30,6 +30,17 @@ if (!$collection) {
 $isOwner = ($currentUser === intval($collection['UserID']));
 
 /* ---------------------------
+   Access control
+   The listing page (collections.php) filters on Visibility, but this page was
+   fetching by CollectionID alone, so any logged-in user could read a private
+   collection by editing ?id= in the URL. $isOwner previously only toggled the
+   edit buttons; it now gates access as well.
+--------------------------- */
+if (!$isOwner && $collection['Visibility'] !== 'Public') {
+    die("You do not have access to this collection.");
+}
+
+/* ---------------------------
    Fetch Documents with Tags + Citation Count
 --------------------------- */
 $docSQL = "

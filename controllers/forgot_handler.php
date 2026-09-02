@@ -2,8 +2,7 @@
 session_start();
 require_once "../includes/connect.php";
 
-// Secret key for signing tokens (store this in config or env file in production)
-define('SECRET_KEY', 'your-super-secret-key-change-this-in-production-12345');
+// SECRET_KEY comes from includes/config.php (loaded by connect.php above).
 
 $email = trim($_POST['email'] ?? '');
 

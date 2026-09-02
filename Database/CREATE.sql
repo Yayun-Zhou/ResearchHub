@@ -77,7 +77,7 @@ CREATE TABLE Document (
     Area VARCHAR(255),
     ISBN VARCHAR(50) UNIQUE,
     LinkPath VARCHAR(500),
-    ImportDate DATE DEFAULT CURDATE(),
+    ImportDate DATE DEFAULT (CURDATE()),
     ReviewStatus ENUM('Pending', 'Approved', 'Rejected') DEFAULT 'Pending',
     FOREIGN KEY (SourceID) REFERENCES Source(SourceID)
 );
