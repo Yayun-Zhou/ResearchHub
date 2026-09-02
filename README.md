@@ -112,17 +112,36 @@ CREATE.sql; INSERT.sql; Create_Grant.sql; AdvancedFinal.sql
 
 3. **Configure Database Connection**
 
-The default configuration in `includes/connect.php` uses:
-- Database: `projectDB3`
-- Admin user: `admin` / `admin_password`
-- App user: `app_user` / `app_user_password`
+Credentials are kept out of version control. Create your local config from the
+template before running the app — the application will not start without it:
 
-If you need to change these, edit `includes/connect.php`:
-```php
-$host   = "localhost";
-$dbName = "projectDB3";
-// Users are automatically selected based on role
+```bash
+cp includes/config.example.php includes/config.php
 ```
+
+Then open `includes/config.php` and fill in your values:
+
+```php
+define('DB_HOST',       'localhost');
+define('DB_NAME',       'projectDB3');
+define('DB_ADMIN_USER', 'admin');       // full access, used for Admin sessions
+define('DB_ADMIN_PASS', '...');
+define('DB_APP_USER',   'app_user');    // restricted, used for all other roles
+define('DB_APP_PASS',   '...');
+define('SECRET_KEY',    '...');         // HMAC key for password-reset tokens
+```
+
+The two database accounts and their passwords are created by
+`Database/Create_Grant.sql`; keep the values here in sync with that file.
+For `SECRET_KEY`, generate a random value rather than reusing an example one:
+
+```bash
+php -r "echo bin2hex(random_bytes(32));"
+```
+
+`includes/config.php` is listed in `.gitignore` and must never be committed.
+`connect.php` selects between the two database accounts based on the session
+role, so both must be present.
 
 4. **Configure Web Server**
 
